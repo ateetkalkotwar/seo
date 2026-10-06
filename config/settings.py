@@ -49,7 +49,17 @@ if not DEBUG:
 
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-    
+
+# ============================================================
+# CLOUDINARY
+# ============================================================
+
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
+
+if CLOUDINARY_URL:
+    import cloudinary
+
+    cloudinary.config(secure=True)
 
 
 # ============================================================
@@ -66,6 +76,7 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
 
     "photos",
+    "cloudinary",
 ]
 
 
