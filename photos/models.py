@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 
 class Person(models.Model):
@@ -69,9 +70,7 @@ class Photo(models.Model):
         related_name="photos"
     )
 
-    image = models.ImageField(
-        upload_to="people/"
-    )
+    image = CloudinaryField("image")
 
     title = models.CharField(
         max_length=255,
