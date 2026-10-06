@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Upload Photo
+    </title>
+
+    <meta
+        name="description"
+        content="Upload a photo and associate it with a person's name."
+    >
+
+</head>
+
+<body>
+
+    <main>
+
+        <header>
+
+            <h1>
+                Upload a Photo
+            </h1>
+
+            <p>
+                Add a person's name and upload their photo.
+                Your submission will be reviewed before becoming public.
+            </p>
+
+        </header>
+
+
+        <section>
+
+            <form
+                method="post"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+                {{ form.non_field_errors }}
+
+
+                <div>
+
+                    <label for="{{ form.first_name.id_for_label }}">
+                        First name
+                    </label>
+
+                    {{ form.first_name }}
+
+                    {{ form.first_name.errors }}
+
+                </div>
+
+
+                <div>
+
+                    <label for="{{ form.last_name.id_for_label }}">
+                        Last name
+                    </label>
+
+                    {{ form.last_name }}
+
+                    {{ form.last_name.errors }}
+
+                </div>
+
+
+                <div>
+
+                    <label for="{{ form.image.id_for_label }}">
+                        Photo
+                    </label>
+
+                    {{ form.image }}
+
+                    {{ form.image.errors }}
+
+                    <small>
+                        JPG, PNG, or WebP. Maximum 10 MB.
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <label for="{{ form.title.id_for_label }}">
+                        Photo title
+                    </label>
+
+                    {{ form.title }}
+
+                    {{ form.title.errors }}
+
+                </div>
+
+
+                <div>
+
+                    <label for="{{ form.description.id_for_label }}">
+                        Description
+                    </label>
+
+                    {{ form.description }}
+
+                    {{ form.description.errors }}
+
+                </div>
+
+
+                <button type="submit">
+                    Submit Photo
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

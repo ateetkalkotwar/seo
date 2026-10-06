@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Find People & Photos
+    </title>
+
+    <meta
+        name="description"
+        content="Search for people and discover their photos and images."
+    >
+
+</head>
+
+
+<body>
+
+    <main>
+
+        <header>
+
+            <h1>
+                Find People & Photos
+            </h1>
+
+            <p>
+                Search for a person's name to discover their photos.
+            </p>
+
+            <p>
+                <a href="{% url 'upload_photo' %}">
+                    Upload a Photo
+                </a>
+            </p>
+
+        </header>
+
+
+        <section>
+
+            <form
+                method="get"
+                action="{% url 'home' %}"
+            >
+
+                <label for="search">
+                    Search name
+                </label>
+
+                <input
+                    type="search"
+                    id="search"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Enter a name..."
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+        </section>
+
+
+        {% if query %}
+
+            <section>
+
+                <h2>
+                    Search results for "{{ query }}"
+                </h2>
+
+
+                {% if people %}
+
+                    {% for person in people %}
+
+                        <article>
+
+                            <h3>
+
+                                <a
+                                    href="{% url 'person_detail' person.slug %}"
+                                >
+                                    {{ person.display_name }}
+                                </a>
+
+                            </h3>
+
+                            <p>
+                                {{ person.photos.count }}
+                                photo{{ person.photos.count|pluralize }}
+                            </p>
+
+                        </article>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>
+                        No people found for "{{ query }}".
+                    </p>
+
+                {% endif %}
+
+            </section>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ photo.title }} | {{ person.display_name }}
+    </title>
+
+    <meta
+        name="description"
+        content="{% if photo.description %}{{ photo.description }}{% else %}Photo of {{ person.display_name }}{% endif %}"
+    >
+
+    <link
+        rel="canonical"
+        href="{{ request.build_absolute_uri }}"
+    >
+
+    <meta
+        property="og:title"
+        content="{{ photo.title }} | {{ person.display_name }}"
+    >
+
+    <meta
+        property="og:description"
+        content="{% if photo.description %}{{ photo.description }}{% else %}Photo of {{ person.display_name }}{% endif %}"
+    >
+
+    <meta
+        property="og:type"
+        content="article"
+    >
+
+    <meta
+        property="og:url"
+        content="{{ request.build_absolute_uri }}"
+    >
+
+    <meta
+        property="og:image"
+        content="{{ request.scheme }}://{{ request.get_host }}{{ photo.image.url }}"
+    >
+
+</head>
+
+
+<body>
+
+    <main>
+
+        <nav>
+
+            <a href="{% url 'person_detail' person.slug %}">
+                ← Back to {{ person.display_name }}
+            </a>
+
+        </nav>
+
+
+        <article>
+
+            <header>
+
+                <h1>
+                    {{ photo.title }}
+                </h1>
+
+                <p>
+                    {{ person.display_name }}
+                </p>
+
+            </header>
+
+
+            <figure>
+
+                <img
+                    src="{{ photo.image.url }}"
+                    alt="{{ photo.alt_text }}"
+                    loading="eager"
+                >
+
+                {% if photo.description %}
+
+                    <figcaption>
+                        {{ photo.description }}
+                    </figcaption>
+
+                {% endif %}
+
+            </figure>
+
+
+            <section>
+
+                <h2>
+                    About this photo
+                </h2>
+
+                <p>
+                    This photo is associated with
+                    {{ person.display_name }}.
+                </p>
+
+            </section>
+
+
+            <footer>
+
+                <a href="{% url 'person_detail' person.slug %}">
+                    View all photos of {{ person.display_name }}
+                </a>
+
+            </footer>
+
+        </article>
+
+    </main>
+
+</body>
+
+</html>

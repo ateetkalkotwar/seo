@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ person.display_name }} | Photos
+    </title>
+
+    <meta
+        name="description"
+        content="Photos of {{ person.display_name }}."
+    >
+
+    <link
+        rel="canonical"
+        href="{{ request.build_absolute_uri }}"
+    >
+
+    <!-- Open Graph -->
+
+    <meta
+        property="og:title"
+        content="{{ person.display_name }} | Photos"
+    >
+
+    <meta
+        property="og:description"
+        content="Photos of {{ person.display_name }}."
+    >
+
+    <meta
+        property="og:type"
+        content="profile"
+    >
+
+    <meta
+        property="og:url"
+        content="{{ request.build_absolute_uri }}"
+    >
+
+</head>
+
+
+<body>
+
+    <main>
+
+        <nav>
+
+            <a href="{% url 'home' %}">
+                ← Back to Search
+            </a>
+
+        </nav>
+
+
+        <article>
+
+            <header>
+
+                <h1>
+                    {{ person.display_name }}
+                </h1>
+
+                <p>
+                    Photos of {{ person.display_name }}
+                </p>
+
+            </header>
+
+
+            {% if photos %}
+
+                <section>
+
+                    <h2>
+                        Photos of {{ person.display_name }}
+                    </h2>
+
+
+                    <div>
+
+                        {% for photo in photos %}
+
+                            <article>
+
+                                <a
+                                    href="{% url 'photo_detail' photo.slug %}"
+                                >
+
+                                    <img
+                                        src="{{ photo.image.url }}"
+                                        alt="{{ photo.alt_text }}"
+                                        loading="lazy"
+                                    >
+
+                                </a>
+
+
+                                <h3>
+
+                                    <a
+                                        href="{% url 'photo_detail' photo.slug %}"
+                                    >
+                                        {{ photo.title }}
+                                    </a>
+
+                                </h3>
+
+
+                                {% if photo.description %}
+
+                                    <p>
+                                        {{ photo.description }}
+                                    </p>
+
+                                {% endif %}
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                </section>
+
+            {% else %}
+
+                <section>
+
+                    <h2>
+                        No published photos yet
+                    </h2>
+
+                    <p>
+                        There are currently no public photos
+                        available for {{ person.display_name }}.
+                    </p>
+
+                </section>
+
+            {% endif %}
+
+
+        </article>
+
+    </main>
+
+</body>
+
+</html>

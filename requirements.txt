@@ -1,0 +1,13 @@
+asgiref==3.12.1
+brotli==1.2.0
+click==8.5.0
+dj-database-url==3.1.2
+Django==5.2.17
+gunicorn==26.2.0
+h11==0.16.0
+pillow==12.3.0
+psycopg2-binary==2.9.13
+sqlparse==0.6.0
+tzdata==2026.5
+uvicorn==0.54.0
+whitenoise==6.12.0
